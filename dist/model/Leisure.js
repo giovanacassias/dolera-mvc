@@ -14,5 +14,11 @@ class Leisure extends Trip_1.default {
     setkindOfTrip(kindOfTrip) {
         this.kindOfTrip = kindOfTrip;
     }
+    //Override
+    displayTrip(trip) {
+        console.log(`    Tipo de viagem: ${trip.getkindOfTrip()}
+        
+        `);
+    }
 }
 exports.default = Leisure;

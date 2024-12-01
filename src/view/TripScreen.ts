@@ -29,8 +29,8 @@ export default class TripScreen {
             case "1":
                 let tripLeisure: Leisure;
                 tripLeisure = this.router.tripController.getNewLeisureTrip();
-                tripLeisure = this.getGeneralAspects(tripLeisure);
-                console.log(tripLeisure);
+                tripLeisure = this.getGeneralAspects(tripLeisure) as Leisure;
+                //console.log(tripLeisure);
                 //povoar com dados específicos
                 tripLeisure = this.getSpecificsLeisure(tripLeisure);
                 console.log(tripLeisure);
@@ -43,7 +43,7 @@ export default class TripScreen {
                 tripBusiness = this.router.tripController.getNewBusinessTrip();
                 tripBusiness = this.getGeneralAspects(tripBusiness) as Business;
                 tripBusiness = this.getSpecificsBusiness(tripBusiness);
-                console.log(tripBusiness);
+                //console.log(tripBusiness);
                 //INJEÇÃO DE DEPENDÊNCIA ESTÁ AQUI - ENVIANDO O OBJETO CRIADO E POPULADO LÁ PARA O CONTROLLER QUE VAI ENVIAR PAtRA A DATABASE E DA PUSH NO ARRAY
                 this.router.tripController.registerNewTrip(tripBusiness);
             break;
@@ -51,9 +51,9 @@ export default class TripScreen {
             case "3":
                 let tripEducational: Educational;
                 tripEducational = this.router.tripController.getNewEducationalTrip();
-                tripEducational = this.getGeneralAspects(tripEducational);
+                tripEducational = this.getGeneralAspects(tripEducational) as Educational;
                 tripEducational = this.getSpecificsEducational(tripEducational);
-                console.log(tripEducational);
+                //console.log(tripEducational);
                 //INJEÇÃO DE DEPENDÊNCIA ESTÁ AQUI - ENVIANDO O OBJETO CRIADO E POPULADO LÁ PARA O CONTROLLER QUE VAI ENVIAR PARA A DATABASE E DA PUSH NO ARRAY
                 this.router.tripController.registerNewTrip(tripEducational);
             break;
@@ -95,7 +95,7 @@ export default class TripScreen {
 
         let kindOfTrip: string;
 
-        kindOfTrip = this.prompt("Qual é o tipo da sua viagem de lazer?");
+        kindOfTrip = this.prompt("Qual é o tipo da sua viagem de lazer? Aventura, cultural, gastronômico, etc");
         trip.setkindOfTrip(kindOfTrip);
 
         return trip;
@@ -122,6 +122,6 @@ export default class TripScreen {
     }
     
     public listAllTrips(){
-
+        this.router.tripController.showAllTrips();
     }
 }

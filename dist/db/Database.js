@@ -2,12 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Database {
     constructor() {
-        this.trips = [];
+        this.allTheTrips = [];
     }
-    //recebendo um objeto de trip e guardando dentro do array 'trips'
+    //recebendo um objeto de trip e guardando dentro do array 'allTheTrips'
     addNewTrip(trip) {
-        this.trips.push(trip);
-        console.log(this.trips);
+        this.allTheTrips.push(trip);
+        console.log(this.allTheTrips);
+    }
+    getAllTrips() {
+        console.log(this.allTheTrips);
+        return this.allTheTrips;
     }
 }
 exports.default = Database;

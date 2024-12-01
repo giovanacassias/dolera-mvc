@@ -24,8 +24,33 @@ class TripController {
     registerNewTrip(trip) {
         this.database.addNewTrip(trip);
     }
-    //retornando o array com todas as viagens
+    displayGeneralAspects(trip) {
+        console.log(`
+        
+    Nome: ${trip.getName()}
+    Moeda: ${trip.getCurrency()}
+    Data de ida: ${trip.getStartDate()}
+    Data de volta: ${trip.getFinishDate()}
+    Orçamento: ${trip.getBudget()}`);
+    }
+    //overriding - sobrescrevendo método da classe mãe
     showAllTrips() {
+        let allTrips = this.database.getAllTrips();
+        allTrips.forEach((trip, index) => {
+            console.log(`Dados da sua ${index + 1}ª viagem:`);
+            if (trip instanceof Business_1.default) {
+                this.displayGeneralAspects(trip);
+                trip.displayTrip(trip);
+            }
+            else if (trip instanceof Leisure_1.default) {
+                this.displayGeneralAspects(trip);
+                trip.displayTrip(trip);
+            }
+            else if (trip instanceof Educational_1.default) {
+                this.displayGeneralAspects(trip);
+                trip.displayTrip(trip);
+            }
+        });
     }
 }
 exports.default = TripController;

@@ -5,14 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Trip_1 = __importDefault(require("./Trip"));
 class Business extends Trip_1.default {
-    /* FORMA 1
-
-        constructor(companyName: string){
-        super();
-        this.companyName = companyName;
-        }
-    
-    */
     constructor() {
         super();
     }
@@ -21,6 +13,12 @@ class Business extends Trip_1.default {
     }
     setCompanyName(companyName) {
         this.companyName = companyName;
+    }
+    //Override
+    displayTrip(trip) {
+        console.log(`    Nome da empresa: ${trip.getCompanyName()}
+        
+        `);
     }
 }
 exports.default = Business;

@@ -22,7 +22,7 @@ class TripScreen {
                 let tripLeisure;
                 tripLeisure = this.router.tripController.getNewLeisureTrip();
                 tripLeisure = this.getGeneralAspects(tripLeisure);
-                console.log(tripLeisure);
+                //console.log(tripLeisure);
                 //povoar com dados específicos
                 tripLeisure = this.getSpecificsLeisure(tripLeisure);
                 console.log(tripLeisure);
@@ -34,7 +34,7 @@ class TripScreen {
                 tripBusiness = this.router.tripController.getNewBusinessTrip();
                 tripBusiness = this.getGeneralAspects(tripBusiness);
                 tripBusiness = this.getSpecificsBusiness(tripBusiness);
-                console.log(tripBusiness);
+                //console.log(tripBusiness);
                 //INJEÇÃO DE DEPENDÊNCIA ESTÁ AQUI - ENVIANDO O OBJETO CRIADO E POPULADO LÁ PARA O CONTROLLER QUE VAI ENVIAR PAtRA A DATABASE E DA PUSH NO ARRAY
                 this.router.tripController.registerNewTrip(tripBusiness);
                 break;
@@ -43,7 +43,7 @@ class TripScreen {
                 tripEducational = this.router.tripController.getNewEducationalTrip();
                 tripEducational = this.getGeneralAspects(tripEducational);
                 tripEducational = this.getSpecificsEducational(tripEducational);
-                console.log(tripEducational);
+                //console.log(tripEducational);
                 //INJEÇÃO DE DEPENDÊNCIA ESTÁ AQUI - ENVIANDO O OBJETO CRIADO E POPULADO LÁ PARA O CONTROLLER QUE VAI ENVIAR PARA A DATABASE E DA PUSH NO ARRAY
                 this.router.tripController.registerNewTrip(tripEducational);
                 break;
@@ -68,7 +68,7 @@ class TripScreen {
     }
     getSpecificsLeisure(trip) {
         let kindOfTrip;
-        kindOfTrip = this.prompt("Qual é o tipo da sua viagem de lazer?");
+        kindOfTrip = this.prompt("Qual é o tipo da sua viagem de lazer? Aventura, cultural, gastronômico, etc");
         trip.setkindOfTrip(kindOfTrip);
         return trip;
     }
@@ -85,6 +85,7 @@ class TripScreen {
         return trip;
     }
     listAllTrips() {
+        this.router.tripController.showAllTrips();
     }
 }
 exports.default = TripScreen;

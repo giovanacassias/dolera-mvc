@@ -11,7 +11,7 @@ class Trip {
         return this.currency;
     }
     setCurrency(currency) {
-        this.currency;
+        this.currency = currency;
     }
     getStartDate() {
         return this.startDate;
@@ -30,6 +30,9 @@ class Trip {
     }
     setBudget(budget) {
         this.budget = budget;
+    }
+    displayTrip(trip) {
+        console.log("Método padrão que será sobrescrito pelos métodos das classes filhas!");
     }
 }
 exports.default = Trip;

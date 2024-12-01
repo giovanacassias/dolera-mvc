@@ -14,5 +14,11 @@ class Educational extends Trip_1.default {
     setSchoolName(schoolName) {
         this.schoolName = schoolName;
     }
+    //Override
+    displayTrip(trip) {
+        console.log(`    Nome da escola: ${trip.getSchoolName()}
+        
+        `);
+    }
 }
 exports.default = Educational;

@@ -18,7 +18,7 @@ export default class Trip {
     }
 
     public setCurrency(currency: string): void {
-        this.currency;
+        this.currency = currency;
     }
 
     public getStartDate(): string {
@@ -43,6 +43,10 @@ export default class Trip {
 
     public setBudget(budget: string): void {
         this.budget = budget;
+    }
+
+    public displayTrip(trip: Trip): void {
+        console.log("Método padrão que será sobrescrito pelos métodos das classes filhas!")
     }
 
 }
