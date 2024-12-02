@@ -1,9 +1,14 @@
-export default class Trip {
+import Traveler from "./Traveler";
+import { ITraveler } from "./ITraveler";
+
+export default class Trip implements ITraveler {
+    
     private name!: string;
     private currency!: string;
     private startDate!: string;
     private finishDate!: string;
     private budget!: string;
+    private travelers: Traveler[] = [];
 
     public getName(): string {
         return this.name;
@@ -43,6 +48,10 @@ export default class Trip {
 
     public setBudget(budget: string): void {
         this.budget = budget;
+    }
+
+    public addTraveler(traveler: Traveler): void {
+        this.travelers.push(traveler);
     }
 
     public displayTrip(trip: Trip): void {

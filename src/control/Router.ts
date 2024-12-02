@@ -1,6 +1,7 @@
 import Database from "../db/Database";
 import PrimaryScreen from "../view/PrimaryScreen";
 import TripController from "./TripController";
+import TravelerController from "./TravelerController";
 
 export default class Router {
 
@@ -12,6 +13,9 @@ export default class Router {
 
     //Instanciando o controlador de 'trip' e enviando o banco de dados via argumento - é o controlador que irá interagir com o banco de dados
     public tripController: TripController = new TripController(this.database);
+
+    //Instanciando o controlador de 'traveler' e enviando o banco de dados via argumento - é o controlador que irá interagir com o banco de dados
+    public travelerController: TravelerController = new TravelerController(this.database);
 
     constructor(){
         this.primaryScreen.getFirstScreen();

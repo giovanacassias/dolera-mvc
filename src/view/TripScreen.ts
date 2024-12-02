@@ -4,6 +4,7 @@ import Leisure from "../model/Leisure";
 import Business from "../model/Business";
 import Educational from "../model/Educational";
 import Trip from "../model/Trip";
+import Traveler from "../model/Traveler";
 
 export default class TripScreen {
 
@@ -19,10 +20,10 @@ export default class TripScreen {
 
 
         let kindOfTrip = this.prompt(`
-            What kind of trip is it? Choose one option:
-            1. Leisure
-            2. Business
-            3. Educational
+            Qual o tipo da sua viagem? Escolha uma das opções:
+            1. Lazer
+            2. Trabalho
+            3. Estudo
         `);
 
         switch(kindOfTrip){
@@ -71,7 +72,10 @@ export default class TripScreen {
             currency: string, 
             startDate: string, 
             finishDate: string, 
-            budget: string;
+            budget: string,
+            resposta: string,
+            traveler: Traveler;
+
             
         name = this.prompt("Qual o nome da sua viagem?");
         trip.setName(name);
@@ -88,6 +92,20 @@ export default class TripScreen {
         budget = this.prompt("Qual é o orçamento total para essa viagem?");
         trip.setBudget(budget);
 
+        resposta = this.prompt(`Você está viajando com mais alguém? 
+            1. sim
+            2. não`
+        );
+
+        switch(resposta){
+            case "1":
+            traveler = this.router.travelerController.newTraveler();
+            let name = this.prompt("Qual é o nome do viajante?");
+            traveler.setName(name);
+            
+        };
+
+
         return trip;
     }
 
@@ -95,7 +113,7 @@ export default class TripScreen {
 
         let kindOfTrip: string;
 
-        kindOfTrip = this.prompt("Qual é o tipo da sua viagem de lazer? Aventura, cultural, gastronômico, etc");
+        kindOfTrip = this.prompt("Qual é o tipo da sua viagem de lazer? Aventura, cultural, gastronômico, etc.?" );
         trip.setkindOfTrip(kindOfTrip);
 
         return trip;
