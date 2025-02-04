@@ -20,9 +20,26 @@ class TripController {
     getNewLeisureTrip() {
         return new Leisure_1.default();
     }
+    getAllTrips() {
+        return this.database.getAllTrips();
+    }
     //guardando uma instância de trip no banco de dados
     registerNewTrip(trip) {
         this.database.addNewTrip(trip);
+    }
+    updateTrip() {
+        let allTrips = this.database.getAllTrips();
+        try {
+            if (allTrips.length != 0) {
+                //
+            }
+            else {
+                console.log("Oops! Nenhuma viagem para atualizar :( ");
+            }
+        }
+        catch (error) {
+            console.error("Um erro aconteceu: ", error.message);
+        }
     }
     displayGeneralAspects(trip) {
         console.log(`
@@ -33,24 +50,34 @@ class TripController {
     Data de volta: ${trip.getFinishDate()}
     Orçamento: ${trip.getBudget()}`);
     }
-    //overriding - sobrescrevendo método da classe mãe
+    //VERSÃO OVERRIDING - sobrescrevendo método da classe mãe "displayTrip(trip)"
     showAllTrips() {
         let allTrips = this.database.getAllTrips();
-        allTrips.forEach((trip, index) => {
-            console.log(`Dados da sua ${index + 1}ª viagem:`);
-            if (trip instanceof Business_1.default) {
-                this.displayGeneralAspects(trip);
-                trip.displayTrip(trip);
+        try {
+            if (allTrips.length != 0) {
+                allTrips.forEach((trip, index) => {
+                    console.log(`Dados da sua ${index + 1}ª viagem:`);
+                    if (trip instanceof Business_1.default) {
+                        this.displayGeneralAspects(trip);
+                        trip.displayTrip(trip); //OVERRIDING
+                    }
+                    else if (trip instanceof Leisure_1.default) {
+                        this.displayGeneralAspects(trip);
+                        trip.displayTrip(trip); //OVERRIDING
+                    }
+                    else if (trip instanceof Educational_1.default) {
+                        this.displayGeneralAspects(trip);
+                        trip.displayTrip(trip); //OVERRIDING
+                    }
+                });
             }
-            else if (trip instanceof Leisure_1.default) {
-                this.displayGeneralAspects(trip);
-                trip.displayTrip(trip);
+            else {
+                console.log("Oops! Nenhuma viagem por aqui :( ");
             }
-            else if (trip instanceof Educational_1.default) {
-                this.displayGeneralAspects(trip);
-                trip.displayTrip(trip);
-            }
-        });
+        }
+        catch (error) {
+            console.error("Um erro aconteceu: ", error.message);
+        }
     }
 }
 exports.default = TripController;

@@ -1,5 +1,4 @@
 import Router from "./control/Router";
-import { CategoryEnum } from "./model/CategoryEnum";
 import Expenses from "./model/Expenses";
 
 //Inicializando um router

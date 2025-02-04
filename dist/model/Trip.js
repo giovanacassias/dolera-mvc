@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class Trip {
+class Trip /* implements ITraveler */ {
+    constructor() {
+        this.travelers = [];
+    }
     getName() {
         return this.name;
     }
@@ -31,6 +34,10 @@ class Trip {
     setBudget(budget) {
         this.budget = budget;
     }
+    /*     public addTraveler(traveler: Traveler): void {
+          this.travelers.push(traveler);
+      }
+  */
     displayTrip(trip) {
         console.log("Método padrão que será sobrescrito pelos métodos das classes filhas!");
     }

@@ -12,20 +12,18 @@ class TripScreen {
     //HERANÇA - TENHO A CLASSE TRIP GENÉRICA E AS CLASSES FILHAS 'LEISURE', 'BUSINESS' E 'EDUCATIONAL' QUE CONTÉM ATRIBUTOS PRÓPRIOS
     registerTrip() {
         let kindOfTrip = this.prompt(`
-            What kind of trip is it? Choose one option:
-            1. Leisure
-            2. Business
-            3. Educational
+            Qual o tipo da sua viagem? Escolha uma das opções:
+            1. Lazer
+            2. Trabalho
+            3. Estudo
         `);
         switch (kindOfTrip) {
             case "1":
                 let tripLeisure;
                 tripLeisure = this.router.tripController.getNewLeisureTrip();
                 tripLeisure = this.getGeneralAspects(tripLeisure);
-                //console.log(tripLeisure);
                 //povoar com dados específicos
                 tripLeisure = this.getSpecificsLeisure(tripLeisure);
-                console.log(tripLeisure);
                 //INJEÇÃO DE DEPENDÊNCIA ESTÁ AQUI - ENVIANDO O OBJETO CRIADO E POPULADO LÁ PARA O CONTROLLER QUE VAI ENVIAR PARA A DATABASE E DA PUSH NO ARRAY
                 this.router.tripController.registerNewTrip(tripLeisure);
                 break;
@@ -34,7 +32,6 @@ class TripScreen {
                 tripBusiness = this.router.tripController.getNewBusinessTrip();
                 tripBusiness = this.getGeneralAspects(tripBusiness);
                 tripBusiness = this.getSpecificsBusiness(tripBusiness);
-                //console.log(tripBusiness);
                 //INJEÇÃO DE DEPENDÊNCIA ESTÁ AQUI - ENVIANDO O OBJETO CRIADO E POPULADO LÁ PARA O CONTROLLER QUE VAI ENVIAR PAtRA A DATABASE E DA PUSH NO ARRAY
                 this.router.tripController.registerNewTrip(tripBusiness);
                 break;
@@ -54,6 +51,8 @@ class TripScreen {
     }
     getGeneralAspects(trip) {
         let name, currency, startDate, finishDate, budget;
+        //resposta: string,
+        //traveler: Traveler;
         name = this.prompt("Qual o nome da sua viagem?");
         trip.setName(name);
         currency = this.prompt("Qual é a moeda usada?");
@@ -64,11 +63,23 @@ class TripScreen {
         trip.setFinishDate(finishDate);
         budget = this.prompt("Qual é o orçamento total para essa viagem?");
         trip.setBudget(budget);
+        /* resposta = this.prompt(`Você está viajando com mais alguém?
+                1. sim
+                2. não`
+            );
+    
+            switch(resposta){
+                case "1":
+                traveler = this.router.travelerController.newTraveler();
+                let name = this.prompt("Qual é o nome do viajante?");
+                traveler.setName(name);
+                
+            }; */
         return trip;
     }
     getSpecificsLeisure(trip) {
         let kindOfTrip;
-        kindOfTrip = this.prompt("Qual é o tipo da sua viagem de lazer? Aventura, cultural, gastronômico, etc");
+        kindOfTrip = this.prompt("Qual é o tipo da sua viagem de lazer? Aventura, cultural, gastronômico, etc.?");
         trip.setkindOfTrip(kindOfTrip);
         return trip;
     }
@@ -86,6 +97,37 @@ class TripScreen {
     }
     listAllTrips() {
         this.router.tripController.showAllTrips();
+    }
+    updateTrip() {
+        //obtendo todas as viagens registradas no 'banco'
+        let allTrips = this.router.tripController.getAllTrips();
+        //mostrando todas as viagens na tela para o user
+        this.router.tripController.showAllTrips();
+        //descobrindo qual viagem o user quer editar
+        if (allTrips.length != 0) {
+            let tripToEdit = parseInt(this.prompt(`
+            Digite o número da viagem que você quer editar:
+            `));
+            //verificando se o input é válido
+            if (tripToEdit < 1 || tripToEdit > allTrips.length) {
+                console.log(`
+          ${tripToEdit} não é um id de viagem válido! Tente novamente
+          
+          `);
+            }
+            else {
+                //atualizando de 1-based (user) para 0-based (array)
+                tripToEdit = tripToEdit - 1;
+                console.log(`
+          Você deseja editar a viagem chamada ${allTrips[tripToEdit].getName()}
+          
+          `);
+            }
+        }
+        else {
+            console.log("Você não possui nenhuma viagem ainda :(");
+        }
+        //this.router.tripController.updateTrip();
     }
 }
 exports.default = TripScreen;

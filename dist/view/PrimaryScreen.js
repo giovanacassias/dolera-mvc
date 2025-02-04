@@ -34,6 +34,7 @@ class PrimaryScreen {
                     break;
                 case "3":
                     //Atualizar uma viagem;
+                    this.tripScreen.updateTrip();
                     break;
                 case "4":
                     //Excluir viagem;
