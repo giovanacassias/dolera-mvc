@@ -8,6 +8,12 @@ class Business extends Trip_1.default {
     constructor() {
         super();
     }
+    getHappiness() {
+        return `retorna dinheiro que compra coisas que nos deixam felizes!`;
+    }
+    showDescription() {
+        console.log("Essa classe é responsável por criar viagens de negócio");
+    }
     getCompanyName() {
         return this.companyName;
     }
@@ -17,6 +23,12 @@ class Business extends Trip_1.default {
     //Override
     displayTrip(trip) {
         console.log(`    Nome da empresa: ${trip.getCompanyName()}
+        
+        `);
+    }
+    //Overload
+    displayTripSpec(trip) {
+        console.log(`    Tipo de viagem: ${trip.getCompanyName()}
         
         `);
     }

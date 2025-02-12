@@ -34,10 +34,6 @@ class Trip /* implements ITraveler */ {
     setBudget(budget) {
         this.budget = budget;
     }
-    /*     public addTraveler(traveler: Traveler): void {
-          this.travelers.push(traveler);
-      }
-  */
     displayTrip(trip) {
         console.log("Método padrão que será sobrescrito pelos métodos das classes filhas!");
     }

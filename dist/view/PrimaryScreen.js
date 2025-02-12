@@ -12,6 +12,31 @@ class PrimaryScreen {
         this.tripScreen = new TripScreen_1.default(this.router);
     }
     getFirstScreen() {
+        //populando o banco para testes
+        let tripA = this.router.tripController.getNewLeisureTrip();
+        tripA.setName("França");
+        tripA.setCurrency("Euro");
+        tripA.setBudget("100");
+        tripA.setStartDate("05/05/2025");
+        tripA.setFinishDate("31/05/2025");
+        tripA.setkindOfTrip("Cultural");
+        this.router.tripController.registerNewTrip(tripA);
+        let tripB = this.router.tripController.getNewBusinessTrip();
+        tripB.setName("PFI");
+        tripB.setCurrency("Real");
+        tripB.setBudget("150");
+        tripB.setStartDate("20/03/2025");
+        tripB.setFinishDate("25/03/2025");
+        tripB.setCompanyName("Fundação Araucária");
+        this.router.tripController.registerNewTrip(tripB);
+        let tripC = this.router.tripController.getNewEducationalTrip();
+        tripC.setName("Intercâmbio");
+        tripC.setCurrency("Dólar");
+        tripC.setBudget("200");
+        tripC.setStartDate("23/09/2025");
+        tripC.setFinishDate("23/09/2026");
+        tripC.setSchoolName("Harvard");
+        this.router.tripController.registerNewTrip(tripC);
         let showScreen = true;
         while (showScreen) {
             let choice = this.prompt(`Escolha uma opção:
@@ -19,7 +44,7 @@ class PrimaryScreen {
                 1. Cadastrar nova viagem
                 2. Listar viagens
                 3. Atualizar viagem
-                4. Excluir viagem
+                4. Pesquisar viagem
                 5. Sair
                 
                 `);
@@ -37,7 +62,8 @@ class PrimaryScreen {
                     this.tripScreen.updateTrip();
                     break;
                 case "4":
-                    //Excluir viagem;
+                    //Pesquisar por viagem;
+                    this.tripScreen.searchTrip();
                     break;
                 case "5":
                     showScreen = false;

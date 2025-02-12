@@ -1,27 +1,39 @@
 import Trip from "./Trip";
 
 export default class Leisure extends Trip {
-    
-    private kindOfTrip!: string;
+  public getHappiness(): string {
+    return `Retorna felicidade pura!!`;
+  }
 
-    constructor(){
-        super();
-    }
+  private kindOfTrip!: string;
 
-    public getkindOfTrip(): string {
-        return this.kindOfTrip;
-    }
+  constructor() {
+    super();
+  }
 
-    public setkindOfTrip(kindOfTrip: string): void {
-        this.kindOfTrip = kindOfTrip;
-    }
+  public getkindOfTrip(): string {
+    return this.kindOfTrip;
+  }
 
+  public setkindOfTrip(kindOfTrip: string): void {
+    this.kindOfTrip = kindOfTrip;
+  }
 
-    //Override
-    public displayTrip(trip: Leisure): void {
-        console.log(
-        `    Tipo de viagem: ${trip.getkindOfTrip()}
+  //Override
+  public displayTrip(trip: Leisure): void {
+    console.log(
+      `    Tipo de viagem: ${trip.getkindOfTrip()}
         
-        `);
-    }
+        `
+    );
+  }
+
+  //Overload
+  public displayTripSpec(trip: Leisure): void {
+    console.log(
+      `    Tipo de viagem: ${trip.getkindOfTrip()}
+        
+        `
+    );
+  }
 }

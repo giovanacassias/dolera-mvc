@@ -8,6 +8,9 @@ class Leisure extends Trip_1.default {
     constructor() {
         super();
     }
+    getHappiness() {
+        return `Retorna felicidade pura!!`;
+    }
     getkindOfTrip() {
         return this.kindOfTrip;
     }
@@ -16,6 +19,12 @@ class Leisure extends Trip_1.default {
     }
     //Override
     displayTrip(trip) {
+        console.log(`    Tipo de viagem: ${trip.getkindOfTrip()}
+        
+        `);
+    }
+    //Overload
+    displayTripSpec(trip) {
         console.log(`    Tipo de viagem: ${trip.getkindOfTrip()}
         
         `);

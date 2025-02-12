@@ -8,6 +8,12 @@ class Educational extends Trip_1.default {
     constructor() {
         super();
     }
+    getHappiness() {
+        return `retorna conhecimento!`;
+    }
+    showDescription() {
+        console.log(``);
+    }
     getSchoolName() {
         return this.schoolName;
     }
@@ -19,6 +25,12 @@ class Educational extends Trip_1.default {
         console.log(`    Nome da escola: ${trip.getSchoolName()}
         
         `);
+    }
+    //Overload
+    displayTripSpec(trip) {
+        console.log(`    Nome da escola: ${trip.getSchoolName()}
+          
+          `);
     }
 }
 exports.default = Educational;

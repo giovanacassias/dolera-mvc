@@ -1,27 +1,43 @@
 import Trip from "./Trip";
+import { IDescription } from "./IDescription";
 
-export default class Educational extends Trip {
-    
-    private schoolName!: string;
+export default class Educational extends Trip implements IDescription {
+  public getHappiness(): string {
+    return `retorna conhecimento!`;
+  }
 
-    constructor(){
-        super();
-    }
+  private schoolName!: string;
 
-    public getSchoolName(): string {
-        return this.schoolName;
-    }
+  constructor() {
+    super();
+  }
+  showDescription(): void {
+    console.log(``);
+  }
 
-    public setSchoolName(schoolName: string): void {
-        this.schoolName = schoolName;
-    }
+  public getSchoolName(): string {
+    return this.schoolName;
+  }
 
+  public setSchoolName(schoolName: string): void {
+    this.schoolName = schoolName;
+  }
 
-    //Override
-    public displayTrip(trip: Educational): void {
-        console.log(
-        `    Nome da escola: ${trip.getSchoolName()}
+  //Override
+  public displayTrip(trip: Educational): void {
+    console.log(
+      `    Nome da escola: ${trip.getSchoolName()}
         
-        `);
-    }
+        `
+    );
+  }
+
+  //Overload
+  public displayTripSpec(trip: Educational): void {
+    console.log(
+      `    Nome da escola: ${trip.getSchoolName()}
+          
+          `
+    );
+  }
 }

@@ -149,8 +149,7 @@ export default class TripScreen {
     if (allTrips.length != 0) {
       let tripToEdit = parseInt(
         this.prompt(
-          `
-            Digite o número da viagem que você quer editar:
+          `Digite o número da viagem que você deseja selecionar:
             `
         )
       );
@@ -160,24 +159,68 @@ export default class TripScreen {
         console.log(
           `
           ${tripToEdit} não é um id de viagem válido! Tente novamente
-          
           `
         );
       } else {
         //atualizando de 1-based (user) para 0-based (array)
         tripToEdit = tripToEdit - 1;
+        let tripToUpdate = allTrips[tripToEdit];
 
         console.log(
           `
-          Você deseja editar a viagem chamada ${allTrips[tripToEdit].getName()}
+          Você deseja editar a viagem chamada ${tripToUpdate.getName()}
+          O que você deseja alterar?
           
           `
         );
+
+        //terá um método para editar as propriedades gerais e 3 overloads pois serão parâmetros diferentes
+
+        if (tripToUpdate instanceof Leisure) {
+          //chamar método que irá editar as propriedades de Leisure
+          //this.router.tripController.updateTrip(allTrips[tripToEdit]);
+          this.router.tripController.menuGeneralOptions();
+          this.router.tripController.menuSpecificOptionsLeisure();
+          let answer = parseInt(
+            this.prompt(`
+            
+            Digite o número da opção: `)
+          );
+        } else if (tripToUpdate instanceof Business) {
+          //chamar método que irá editar as propriedade de Business
+        } else if (tripToUpdate instanceof Educational) {
+          //chamar método que irá editar as propriedades de Educational
+        } else {
+          console.log("Algo deu muito errado aqui!");
+        }
       }
     } else {
-      console.log("Você não possui nenhuma viagem ainda :(");
+      console.log(
+        "Você não possui nenhuma viagem ainda :( Que tal adicionar uma? "
+      );
     }
 
     //this.router.tripController.updateTrip();
+  }
+
+  //Pesquisa especializada no banco de dados
+  public searchTrip(): void {
+    let trips = this.router.tripController.getAllTrips();
+
+    let amount = Number.parseInt(
+      this.prompt(`
+      Pesquisar por viagens com orçamento maior ou igual a:
+      
+      `)
+    );
+
+    trips.forEach((trip) => {
+      if (Number.parseInt(trip.getBudget()) >= amount) {
+        let name = trip.getName();
+        let budget = trip.getBudget();
+
+        console.log(`${name}: R$${budget}`);
+      }
+    });
   }
 }

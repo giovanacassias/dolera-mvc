@@ -1,7 +1,7 @@
 import Traveler from "./Traveler";
 import { ITraveler } from "./ITraveler";
 
-export default class Trip /* implements ITraveler */ {
+export default abstract class Trip /* implements ITraveler */ {
   private name!: string;
   private currency!: string;
   private startDate!: string;
@@ -53,6 +53,8 @@ export default class Trip /* implements ITraveler */ {
         this.travelers.push(traveler);
     }
 */
+
+  public abstract getHappiness(): string;
 
   public displayTrip(trip: Trip): void {
     console.log(

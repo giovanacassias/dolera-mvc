@@ -4,6 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const prompt_sync_1 = __importDefault(require("prompt-sync"));
+const Leisure_1 = __importDefault(require("../model/Leisure"));
+const Business_1 = __importDefault(require("../model/Business"));
+const Educational_1 = __importDefault(require("../model/Educational"));
 class TripScreen {
     constructor(router) {
         this.prompt = (0, prompt_sync_1.default)();
@@ -105,29 +108,63 @@ class TripScreen {
         this.router.tripController.showAllTrips();
         //descobrindo qual viagem o user quer editar
         if (allTrips.length != 0) {
-            let tripToEdit = parseInt(this.prompt(`
-            Digite o número da viagem que você quer editar:
+            let tripToEdit = parseInt(this.prompt(`Digite o número da viagem que você deseja selecionar:
             `));
             //verificando se o input é válido
             if (tripToEdit < 1 || tripToEdit > allTrips.length) {
                 console.log(`
           ${tripToEdit} não é um id de viagem válido! Tente novamente
-          
           `);
             }
             else {
                 //atualizando de 1-based (user) para 0-based (array)
                 tripToEdit = tripToEdit - 1;
+                let tripToUpdate = allTrips[tripToEdit];
                 console.log(`
-          Você deseja editar a viagem chamada ${allTrips[tripToEdit].getName()}
+          Você deseja editar a viagem chamada ${tripToUpdate.getName()}
+          O que você deseja alterar?
           
           `);
+                //terá um método para editar as propriedades gerais e 3 overloads pois serão parâmetros diferentes
+                if (tripToUpdate instanceof Leisure_1.default) {
+                    //chamar método que irá editar as propriedades de Leisure
+                    //this.router.tripController.updateTrip(allTrips[tripToEdit]);
+                    this.router.tripController.menuGeneralOptions();
+                    this.router.tripController.menuSpecificOptionsLeisure();
+                    let answer = parseInt(this.prompt(`
+            
+            Digite o número da opção: `));
+                }
+                else if (tripToUpdate instanceof Business_1.default) {
+                    //chamar método que irá editar as propriedade de Business
+                }
+                else if (tripToUpdate instanceof Educational_1.default) {
+                    //chamar método que irá editar as propriedades de Educational
+                }
+                else {
+                    console.log("Algo deu muito errado aqui!");
+                }
             }
         }
         else {
-            console.log("Você não possui nenhuma viagem ainda :(");
+            console.log("Você não possui nenhuma viagem ainda :( Que tal adicionar uma? ");
         }
         //this.router.tripController.updateTrip();
+    }
+    //Pesquisa especializada no banco de dados
+    searchTrip() {
+        let trips = this.router.tripController.getAllTrips();
+        let amount = Number.parseInt(this.prompt(`
+      Pesquisar por viagens com orçamento maior ou igual a:
+      
+      `));
+        trips.forEach((trip) => {
+            if (Number.parseInt(trip.getBudget()) >= amount) {
+                let name = trip.getName();
+                let budget = trip.getBudget();
+                console.log(`${name}: R$${budget}`);
+            }
+        });
     }
 }
 exports.default = TripScreen;
