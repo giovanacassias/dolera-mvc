@@ -141,7 +141,6 @@ export default class TripScreen {
   public updateTrip() {
     //obtendo todas as viagens registradas no 'banco'
     let allTrips = this.router.tripController.getAllTrips();
-
     //mostrando todas as viagens na tela para o user
     this.router.tripController.showAllTrips();
 
@@ -174,8 +173,6 @@ export default class TripScreen {
           `
         );
 
-        //terá um método para editar as propriedades gerais e 3 overloads pois serão parâmetros diferentes
-
         if (tripToUpdate instanceof Leisure) {
           //chamar método que irá editar as propriedades de Leisure
           //this.router.tripController.updateTrip(allTrips[tripToEdit]);
@@ -186,10 +183,59 @@ export default class TripScreen {
             
             Digite o número da opção: `)
           );
+
+          //checando se input é valido (menu de 1 à 6)
+          if (answer >= 1 && answer < 6) {
+            this.updatoOneToFive(tripToUpdate, answer);
+          } else if (answer === 6) {
+            let kindOfTrip = this.prompt(`Informe o novo tipo da viagem: `);
+            this.router.tripController.updateTrip<Leisure>(
+              tripToUpdate,
+              kindOfTrip
+            );
+          } else {
+            console.log("Opção inválida!");
+          }
         } else if (tripToUpdate instanceof Business) {
-          //chamar método que irá editar as propriedade de Business
+          this.router.tripController.menuGeneralOptions();
+          this.router.tripController.menuSpecificOptionsBusiness();
+          let answer = parseInt(
+            this.prompt(`
+            
+            Digite o número da opção: `)
+          );
+
+          if (answer >= 1 && answer < 6) {
+            this.updatoOneToFive(tripToUpdate, answer);
+          } else if (answer === 6) {
+            let companyName = this.prompt(`Informe o novo nome da empresa: `);
+            this.router.tripController.updateTrip<Business>(
+              tripToUpdate,
+              companyName
+            );
+          } else {
+            console.log("Opção inválida!");
+          }
         } else if (tripToUpdate instanceof Educational) {
-          //chamar método que irá editar as propriedades de Educational
+          this.router.tripController.menuGeneralOptions();
+          this.router.tripController.menuSpecificOptionsEducational();
+          let answer = parseInt(
+            this.prompt(`
+            
+            Digite o número da opção: `)
+          );
+
+          if (answer >= 1 && answer < 6) {
+            this.updatoOneToFive(tripToUpdate, answer);
+          } else if (answer === 6) {
+            let schoolName = this.prompt(`Informe o novo nome da escola: `);
+            this.router.tripController.updateTrip<Educational>(
+              tripToUpdate,
+              schoolName
+            );
+          } else {
+            console.log("Opção inválida!");
+          }
         } else {
           console.log("Algo deu muito errado aqui!");
         }
@@ -199,8 +245,39 @@ export default class TripScreen {
         "Você não possui nenhuma viagem ainda :( Que tal adicionar uma? "
       );
     }
+  }
 
-    //this.router.tripController.updateTrip();
+  //Seta as propriedades comuns à todos os objetos das classes filhas
+  public updatoOneToFive(tripToUpdate: Trip, answer: number) {
+    switch (answer) {
+      case 1:
+        let name = this.prompt(`Informe o novo nome da viagem: `);
+        tripToUpdate.setName(name);
+        console.log("Nome atualizado com sucesso!");
+        break;
+      case 2:
+        let currency = this.prompt(`Informe a nova moeda da viagem: `);
+        tripToUpdate.setCurrency(currency);
+        console.log("Moeda atualizada com sucesso!");
+        break;
+      case 3:
+        let startDate = this.prompt(`Informe a nova data de ida da viagem: `);
+        tripToUpdate.setStartDate(startDate);
+        console.log("Ida atualizada com sucesso!");
+        break;
+      case 4:
+        let finishDate = this.prompt(
+          `Informe a nova data de volta da viagem: `
+        );
+        tripToUpdate.setFinishDate(finishDate);
+        console.log("Volta atualizada com sucesso!");
+        break;
+      case 5:
+        let budget = this.prompt(`Informe o novo orçamento da viagem: `);
+        tripToUpdate.setBudget(budget);
+        console.log("Orçamento atualizado com sucesso!");
+        break;
+    }
   }
 
   //Pesquisa especializada no banco de dados
@@ -222,5 +299,15 @@ export default class TripScreen {
         console.log(`${name}: R$${budget}`);
       }
     });
+  }
+
+  public deleteTrip(): void {
+    this.listAllTrips();
+
+    let trip = Number.parseInt(
+      this.prompt(`Digite o número da viagem que deseja excluir: `)
+    );
+
+    this.router.tripController.deleteTrip(trip);
   }
 }

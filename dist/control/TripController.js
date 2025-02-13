@@ -28,19 +28,24 @@ class TripController {
     registerNewTrip(trip) {
         this.database.addNewTrip(trip);
     }
-    /*   public updateTrip() {
-      let allTrips: Trip[] = this.database.getAllTrips();
-  
-      try {
-        if (allTrips.length != 0) {
-          //
-        } else {
-          console.log("Oops! Nenhuma viagem para atualizar :( ");
+    updateTrip(trip, property) {
+        if (trip instanceof Leisure_1.default) {
+            console.log(property);
+            trip.setkindOfTrip(property);
+            console.log("Tipo de viagem atualizado com sucesso!");
         }
-      } catch (error: any) {
-        console.error("Um erro aconteceu: ", error.message);
-      }
-    } */
+        else if (trip instanceof Business_1.default) {
+            trip.setCompanyName(property);
+            console.log("Nome da empresa atualizado com sucesso!");
+        }
+        else if (trip instanceof Educational_1.default) {
+            trip.setSchoolName(property);
+            console.log("Nome da escola atualizado com sucesso!");
+        }
+        else {
+            console.log("Algo está errado!!");
+        }
+    }
     displayGeneralAspects(trip) {
         console.log(`
         
@@ -117,6 +122,11 @@ class TripController {
     }
     menuSpecificOptionsEducational() {
         console.log(`        6. Nome da escola`);
+    }
+    deleteTrip(id) {
+        let allTrips = this.getAllTrips();
+        let index = id - 1;
+        allTrips.splice(index, 1);
     }
 }
 exports.default = TripController;

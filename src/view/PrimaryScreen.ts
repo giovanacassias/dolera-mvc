@@ -52,7 +52,8 @@ export default class PrimaryScreen {
                 2. Listar viagens
                 3. Atualizar viagem
                 4. Pesquisar viagem
-                5. Sair
+                5. Excluir viagem
+                6. Sair
                 
                 `
       );
@@ -79,6 +80,12 @@ export default class PrimaryScreen {
           break;
 
         case "5":
+          //Excluir uma viagem
+          this.tripScreen.deleteTrip();
+
+          break;
+
+        case "6":
           showScreen = false;
           break; //Não é reduntante? Por que se for 'false' ele irá sair do loop;
 
