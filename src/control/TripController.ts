@@ -187,9 +187,8 @@ export default class TripController {
     }
 
     //criando o conteúdo
-    const tripData = allTrips.map((trip, index) => {
-      return `
-      
+    /*     const tripData = allTrips.map((trip, index) => {
+      `
       Viagem ${index + 1}: 
       Destino: ${trip.getName()}
       Moeda: ${trip.getCurrency()}
@@ -197,12 +196,34 @@ export default class TripController {
       Volta: ${trip.getFinishDate()}
       Orçamento: R$${trip.getBudget()}
       `;
-    });
+    }); */
 
     //escrevendo as viagens no PDF
-    tripData.forEach((tripDetails, index) => {
+    allTrips.forEach((trip, index) => {
+      let tripDetails = `
+        VIAGEM ${index + 1} 
+        Nome: ${trip.getName()}
+        Moeda: ${trip.getCurrency()}
+        Ida: ${trip.getStartDate()}
+        Volta: ${trip.getFinishDate()}
+        Orçamento: R$${trip.getBudget()}`;
+
+      if (trip instanceof Leisure) {
+        tripDetails += `
+        Tipo de viagem: ${trip.getkindOfTrip()}
+        `;
+      } else if (trip instanceof Business) {
+        tripDetails += `
+        Nome da empresa: ${trip.getCompanyName()}
+        `;
+      } else if (trip instanceof Educational) {
+        tripDetails += `
+        Nome da escola: ${trip.getSchoolName()}
+        `;
+      }
+
       doc.text(tripDetails, 10, yPosition);
-      yPosition += 50;
+      yPosition += 60;
     });
 
     if (yPosition > 270) {
@@ -211,5 +232,7 @@ export default class TripController {
     }
 
     doc.save("relatorio-viagens.pdf");
+
+    console.log("Relatório gerado com sucesso!");
   }
 }

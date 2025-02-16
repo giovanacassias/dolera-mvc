@@ -163,27 +163,49 @@ class TripController {
             return;
         }
         //criando o conteúdo
-        const tripData = allTrips.map((trip, index) => {
-            return `
-      
-      Viagem ${index + 1}: 
-      Destino: ${trip.getName()}
-      Moeda: ${trip.getCurrency()}
-      Ida: ${trip.getStartDate()}
-      Volta: ${trip.getFinishDate()}
-      Orçamento: ${trip.getBudget()}
-      `;
-        });
+        /*     const tripData = allTrips.map((trip, index) => {
+          `
+          Viagem ${index + 1}:
+          Destino: ${trip.getName()}
+          Moeda: ${trip.getCurrency()}
+          Ida: ${trip.getStartDate()}
+          Volta: ${trip.getFinishDate()}
+          Orçamento: R$${trip.getBudget()}
+          `;
+        }); */
         //escrevendo as viagens no PDF
-        tripData.forEach((tripDetails, index) => {
+        allTrips.forEach((trip, index) => {
+            let tripDetails = `
+        VIAGEM ${index + 1} 
+        Nome: ${trip.getName()}
+        Moeda: ${trip.getCurrency()}
+        Ida: ${trip.getStartDate()}
+        Volta: ${trip.getFinishDate()}
+        Orçamento: R$${trip.getBudget()}`;
+            if (trip instanceof Leisure_1.default) {
+                tripDetails += `
+        Tipo de viagem: ${trip.getkindOfTrip()}
+        `;
+            }
+            else if (trip instanceof Business_1.default) {
+                tripDetails += `
+        Nome da empresa: ${trip.getCompanyName()}
+        `;
+            }
+            else if (trip instanceof Educational_1.default) {
+                tripDetails += `
+        Nome da escola: ${trip.getSchoolName()}
+        `;
+            }
             doc.text(tripDetails, 10, yPosition);
-            yPosition += 50;
+            yPosition += 60;
         });
         if (yPosition > 270) {
             doc.addPage();
             yPosition = 20; // Reinicia a posição na nova página
         }
         doc.save("relatorio-viagens.pdf");
+        console.log("Relatório gerado com sucesso!");
     }
 }
 exports.default = TripController;
