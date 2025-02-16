@@ -2,6 +2,7 @@ import Database from "../db/Database";
 import PrimaryScreen from "../view/PrimaryScreen";
 import TripController from "./TripController";
 import TravelerController from "./TravelerController";
+import MyError from "./service/MyError";
 
 export default class Router {
   //Única instância de database do sistema

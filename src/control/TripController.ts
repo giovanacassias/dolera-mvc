@@ -186,18 +186,6 @@ export default class TripController {
       return;
     }
 
-    //criando o conteúdo
-    /*     const tripData = allTrips.map((trip, index) => {
-      `
-      Viagem ${index + 1}: 
-      Destino: ${trip.getName()}
-      Moeda: ${trip.getCurrency()}
-      Ida: ${trip.getStartDate()}
-      Volta: ${trip.getFinishDate()}
-      Orçamento: R$${trip.getBudget()}
-      `;
-    }); */
-
     //escrevendo as viagens no PDF
     allTrips.forEach((trip, index) => {
       let tripDetails = `
