@@ -135,7 +135,7 @@ class TripScreen {
             Digite o número da opção: `));
                     //checando se input é valido (menu de 1 à 6)
                     if (answer >= 1 && answer < 6) {
-                        this.updatoOneToFive(tripToUpdate, answer);
+                        this.updateOneToFive(tripToUpdate, answer);
                     }
                     else if (answer === 6) {
                         let kindOfTrip = this.prompt(`Informe o novo tipo da viagem: `);
@@ -152,7 +152,7 @@ class TripScreen {
             
             Digite o número da opção: `));
                     if (answer >= 1 && answer < 6) {
-                        this.updatoOneToFive(tripToUpdate, answer);
+                        this.updateOneToFive(tripToUpdate, answer);
                     }
                     else if (answer === 6) {
                         let companyName = this.prompt(`Informe o novo nome da empresa: `);
@@ -169,7 +169,7 @@ class TripScreen {
             
             Digite o número da opção: `));
                     if (answer >= 1 && answer < 6) {
-                        this.updatoOneToFive(tripToUpdate, answer);
+                        this.updateOneToFive(tripToUpdate, answer);
                     }
                     else if (answer === 6) {
                         let schoolName = this.prompt(`Informe o novo nome da escola: `);
@@ -189,7 +189,7 @@ class TripScreen {
         }
     }
     //Seta as propriedades comuns à todos os objetos das classes filhas
-    updatoOneToFive(tripToUpdate, answer) {
+    updateOneToFive(tripToUpdate, answer) {
         switch (answer) {
             case 1:
                 let name = this.prompt(`Informe o novo nome da viagem: `);

@@ -13,7 +13,7 @@ export default class PrimaryScreen {
   }
 
   public getFirstScreen(): void {
-    //populando o banco para testes
+    /*     //populando o banco para testes
 
     let tripA = this.router.tripController.getNewLeisureTrip();
     tripA.setName("França");
@@ -40,7 +40,7 @@ export default class PrimaryScreen {
     tripC.setStartDate("23/09/2025");
     tripC.setFinishDate("23/09/2026");
     tripC.setSchoolName("Harvard");
-    this.router.tripController.registerNewTrip(tripC);
+    this.router.tripController.registerNewTrip(tripC); */
 
     let showScreen: boolean = true;
 

@@ -12,7 +12,8 @@ class PrimaryScreen {
         this.tripScreen = new TripScreen_1.default(this.router);
     }
     getFirstScreen() {
-        //populando o banco para testes
+        /*     //populando o banco para testes
+    
         let tripA = this.router.tripController.getNewLeisureTrip();
         tripA.setName("França");
         tripA.setCurrency("Euro");
@@ -21,6 +22,7 @@ class PrimaryScreen {
         tripA.setFinishDate("31/05/2025");
         tripA.setkindOfTrip("Cultural");
         this.router.tripController.registerNewTrip(tripA);
+    
         let tripB = this.router.tripController.getNewBusinessTrip();
         tripB.setName("PFI");
         tripB.setCurrency("Real");
@@ -29,6 +31,7 @@ class PrimaryScreen {
         tripB.setFinishDate("25/03/2025");
         tripB.setCompanyName("Fundação Araucária");
         this.router.tripController.registerNewTrip(tripB);
+    
         let tripC = this.router.tripController.getNewEducationalTrip();
         tripC.setName("Intercâmbio");
         tripC.setCurrency("Dólar");
@@ -36,7 +39,7 @@ class PrimaryScreen {
         tripC.setStartDate("23/09/2025");
         tripC.setFinishDate("23/09/2026");
         tripC.setSchoolName("Harvard");
-        this.router.tripController.registerNewTrip(tripC);
+        this.router.tripController.registerNewTrip(tripC); */
         let showScreen = true;
         while (showScreen) {
             let choice = this.prompt(`Escolha uma opção:

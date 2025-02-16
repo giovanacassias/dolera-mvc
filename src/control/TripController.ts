@@ -36,6 +36,7 @@ export default class TripController {
     this.database.addNewTrip(trip);
   }
 
+  //Tipos genéricos
   public updateTrip<T>(trip: T, property: string): void {
     if (trip instanceof Leisure) {
       console.log(property);
@@ -142,10 +143,31 @@ export default class TripController {
     console.log(`        6. Nome da escola`);
   }
 
-  public deleteTrip(id: number): void {
+  //Adaptado para teste
+
+  public deleteTrip(id: number): string {
+    //verificando se input é válido
+    if (id < 1 || id > this.getAllTrips().length) {
+      console.log("Número inválido! Tente novamente.");
+      return "Número inválido! Tente novamente.";
+    } else {
+      let allTrips: Trip[] = this.getAllTrips();
+      let index = id - 1;
+      const tripName = allTrips[index].getName();
+      allTrips.splice(index, 1);
+      console.log("Viagem excluída!");
+      return tripName;
+    }
+  }
+
+  /*   ORIGINAL
+
+    public deleteTrip(id: number): void {
     let allTrips: Trip[] = this.getAllTrips();
     let index = id - 1;
     allTrips.splice(index, 1);
     console.log("Viagem excluída!");
-  }
+    } 
+    
+  */
 }

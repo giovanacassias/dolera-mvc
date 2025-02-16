@@ -186,7 +186,7 @@ export default class TripScreen {
 
           //checando se input é valido (menu de 1 à 6)
           if (answer >= 1 && answer < 6) {
-            this.updatoOneToFive(tripToUpdate, answer);
+            this.updateOneToFive(tripToUpdate, answer);
           } else if (answer === 6) {
             let kindOfTrip = this.prompt(`Informe o novo tipo da viagem: `);
             this.router.tripController.updateTrip<Leisure>(
@@ -206,7 +206,7 @@ export default class TripScreen {
           );
 
           if (answer >= 1 && answer < 6) {
-            this.updatoOneToFive(tripToUpdate, answer);
+            this.updateOneToFive(tripToUpdate, answer);
           } else if (answer === 6) {
             let companyName = this.prompt(`Informe o novo nome da empresa: `);
             this.router.tripController.updateTrip<Business>(
@@ -226,7 +226,7 @@ export default class TripScreen {
           );
 
           if (answer >= 1 && answer < 6) {
-            this.updatoOneToFive(tripToUpdate, answer);
+            this.updateOneToFive(tripToUpdate, answer);
           } else if (answer === 6) {
             let schoolName = this.prompt(`Informe o novo nome da escola: `);
             this.router.tripController.updateTrip<Educational>(
@@ -248,7 +248,7 @@ export default class TripScreen {
   }
 
   //Seta as propriedades comuns à todos os objetos das classes filhas
-  public updatoOneToFive(tripToUpdate: Trip, answer: number) {
+  public updateOneToFive(tripToUpdate: Trip, answer: number) {
     switch (answer) {
       case 1:
         let name = this.prompt(`Informe o novo nome da viagem: `);
@@ -301,7 +301,7 @@ export default class TripScreen {
     });
   }
 
-  public deleteTrip(): void {
+  public deleteTrip(): void | string {
     this.listAllTrips();
 
     let trip = Number.parseInt(

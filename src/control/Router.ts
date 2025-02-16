@@ -19,6 +19,35 @@ export default class Router {
   );
 
   constructor() {
-    this.primaryScreen.getFirstScreen();
+    //this.primaryScreen.getFirstScreen();
+
+    //populando o banco para testes
+
+    let tripA = this.tripController.getNewLeisureTrip();
+    tripA.setName("França");
+    tripA.setCurrency("Euro");
+    tripA.setBudget("100");
+    tripA.setStartDate("05/05/2025");
+    tripA.setFinishDate("31/05/2025");
+    tripA.setkindOfTrip("Cultural");
+    this.tripController.registerNewTrip(tripA);
+
+    let tripB = this.tripController.getNewBusinessTrip();
+    tripB.setName("PFI");
+    tripB.setCurrency("Real");
+    tripB.setBudget("150");
+    tripB.setStartDate("20/03/2025");
+    tripB.setFinishDate("25/03/2025");
+    tripB.setCompanyName("Fundação Araucária");
+    this.tripController.registerNewTrip(tripB);
+
+    let tripC = this.tripController.getNewEducationalTrip();
+    tripC.setName("Intercâmbio");
+    tripC.setCurrency("Dólar");
+    tripC.setBudget("200");
+    tripC.setStartDate("23/09/2025");
+    tripC.setFinishDate("23/09/2026");
+    tripC.setSchoolName("Harvard");
+    this.tripController.registerNewTrip(tripC);
   }
 }
