@@ -48,7 +48,7 @@ export default class Router {
     tripC.setSchoolName("Harvard");
     this.tripController.registerNewTrip(tripC);
 
-    //this.primaryScreen.getFirstScreen();
+    this.primaryScreen.getFirstScreen();
 
     //populando o banco para testes
   }
