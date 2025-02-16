@@ -5,6 +5,7 @@ import Business from "../model/Business";
 import Educational from "../model/Educational";
 import Trip from "../model/Trip";
 import Traveler from "../model/Traveler";
+import { Status } from "../enums/Status";
 
 export default class TripScreen {
   private prompt = PromptSync();
@@ -299,6 +300,55 @@ export default class TripScreen {
         console.log(`${name}: R$${budget}`);
       }
     });
+  }
+
+  public tripStatus() {
+    //Buscando array com todas as viagens
+    let allTrips = this.router.tripController.getAllTrips();
+
+    //Mostrando todas as viagens cadastradas
+    this.router.tripController.showAllTrips();
+
+    //Coletando o index da viagem a ser editada
+    let tripToEdit = Number.parseInt(
+      this.prompt(`
+      Qual viagem você deseja incluir um status?
+    `)
+    );
+
+    //verificando se o input é válido
+    if (tripToEdit < 1 || tripToEdit > allTrips.length) {
+      console.log(
+        `${tripToEdit} não é um id de viagem válido! Tente novamente`
+      );
+    } else {
+      let status = Number.parseInt(
+        this.prompt(`
+        Qual o novo status da viagem?
+        1. Viagem atual
+        2. Viagem concluída
+      `)
+      );
+
+      let selectedTrip = allTrips[tripToEdit - 1];
+      console.log(
+        `Atualmente, o status da viagem ${selectedTrip.getName()} é de: ${selectedTrip.getStatus()}`
+      );
+
+      if (status === 1) {
+        selectedTrip.setStatus(Status.Current);
+        console.log(
+          `O status da viagem chamada ${selectedTrip.getName()} é: ${selectedTrip.getStatus()}`
+        );
+      } else if (status === 2) {
+        selectedTrip.setStatus(Status.Finished);
+        console.log(
+          `O status da viagem chamada ${selectedTrip.getName()} é: ${selectedTrip.getStatus()}`
+        );
+      } else {
+        console.log("Opção inválida!");
+      }
+    }
   }
 
   public deleteTrip(): void | string {

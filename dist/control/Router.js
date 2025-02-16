@@ -9,7 +9,6 @@ const TripController_1 = __importDefault(require("./TripController"));
 const TravelerController_1 = __importDefault(require("./TravelerController"));
 class Router {
     constructor() {
-        //this.primaryScreen.getFirstScreen();
         //Única instância de database do sistema
         this.database = new Database_1.default();
         //Instanciândo a tela inicial e mandando o próprio router como argumento para o construtor de PrimaryScreen
@@ -18,7 +17,7 @@ class Router {
         this.tripController = new TripController_1.default(this.database);
         //Instanciando o controlador de 'traveler' e enviando o banco de dados via argumento - é o controlador que irá interagir com o banco de dados
         this.travelerController = new TravelerController_1.default(this.database);
-        //populando o banco para testes
+        //PS.: para fazer os TESTES COM JEST COMENTAR A CHAMADA DE PRIMARY SCREEN!!
         let tripA = this.tripController.getNewLeisureTrip();
         tripA.setName("França");
         tripA.setCurrency("Euro");
@@ -43,6 +42,8 @@ class Router {
         tripC.setFinishDate("23/09/2026");
         tripC.setSchoolName("Harvard");
         this.tripController.registerNewTrip(tripC);
+        this.primaryScreen.getFirstScreen();
+        //populando o banco para testes
     }
 }
 exports.default = Router;

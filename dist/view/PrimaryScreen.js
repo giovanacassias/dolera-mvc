@@ -49,7 +49,8 @@ class PrimaryScreen {
                 3. Atualizar viagem
                 4. Pesquisar viagem
                 5. Excluir viagem
-                6. Sair
+                6. Alterar status da viagem
+                7. Sair
                 
                 `);
             switch (choice) {
@@ -74,8 +75,13 @@ class PrimaryScreen {
                     this.tripScreen.deleteTrip();
                     break;
                 case "6":
+                    //Editando status da viagem
+                    this.tripScreen.tripStatus();
+                    break;
+                case "7":
+                    //Saindo do sistema
                     showScreen = false;
-                    break; //Não é reduntante? Por que se for 'false' ele irá sair do loop;
+                    break;
                 default:
                     console.log("Opção inválida!");
             }

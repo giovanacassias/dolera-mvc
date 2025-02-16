@@ -7,6 +7,7 @@ const prompt_sync_1 = __importDefault(require("prompt-sync"));
 const Leisure_1 = __importDefault(require("../model/Leisure"));
 const Business_1 = __importDefault(require("../model/Business"));
 const Educational_1 = __importDefault(require("../model/Educational"));
+const Status_1 = require("../enums/Status");
 class TripScreen {
     constructor(router) {
         this.prompt = (0, prompt_sync_1.default)();
@@ -232,6 +233,40 @@ class TripScreen {
                 console.log(`${name}: R$${budget}`);
             }
         });
+    }
+    tripStatus() {
+        //Buscando array com todas as viagens
+        let allTrips = this.router.tripController.getAllTrips();
+        //Mostrando todas as viagens cadastradas
+        this.router.tripController.showAllTrips();
+        //Coletando o index da viagem a ser editada
+        let tripToEdit = Number.parseInt(this.prompt(`
+      Qual viagem você deseja incluir um status?
+    `));
+        //verificando se o input é válido
+        if (tripToEdit < 1 || tripToEdit > allTrips.length) {
+            console.log(`${tripToEdit} não é um id de viagem válido! Tente novamente`);
+        }
+        else {
+            let status = Number.parseInt(this.prompt(`
+        Qual o novo status da viagem?
+        1. Viagem atual
+        2. Viagem concluída
+      `));
+            let selectedTrip = allTrips[tripToEdit - 1];
+            console.log(`Atualmente, o status da viagem ${selectedTrip.getName()} é de: ${selectedTrip.getStatus()}`);
+            if (status === 1) {
+                selectedTrip.setStatus(Status_1.Status.Current);
+                console.log(`O status da viagem chamada ${selectedTrip.getName()} é: ${selectedTrip.getStatus()}`);
+            }
+            else if (status === 2) {
+                selectedTrip.setStatus(Status_1.Status.Finished);
+                console.log(`O status da viagem chamada ${selectedTrip.getName()} é: ${selectedTrip.getStatus()}`);
+            }
+            else {
+                console.log("Opção inválida!");
+            }
+        }
     }
     deleteTrip() {
         this.listAllTrips();

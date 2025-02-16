@@ -1,5 +1,6 @@
 import Traveler from "./Traveler";
 import { ITraveler } from "./ITraveler";
+import { Status } from "../enums/Status";
 
 export default abstract class Trip /* implements ITraveler */ {
   private name!: string;
@@ -8,6 +9,11 @@ export default abstract class Trip /* implements ITraveler */ {
   private finishDate!: string;
   private budget!: string;
   private travelers: Traveler[] = [];
+  private status: Status;
+
+  constructor() {
+    this.status = Status.notDefined;
+  }
 
   public getName(): string {
     return this.name;
@@ -47,6 +53,14 @@ export default abstract class Trip /* implements ITraveler */ {
 
   public setBudget(budget: string): void {
     this.budget = budget;
+  }
+
+  public getStatus(): Status {
+    return this.status;
+  }
+
+  public setStatus(status: Status): void {
+    this.status = status;
   }
 
   /*     public addTraveler(traveler: Traveler): void {

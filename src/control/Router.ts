@@ -19,10 +19,7 @@ export default class Router {
   );
 
   constructor() {
-    //this.primaryScreen.getFirstScreen();
-
-    //populando o banco para testes
-
+    //PS.: para fazer os TESTES COM JEST COMENTAR A CHAMADA DE PRIMARY SCREEN!!
     let tripA = this.tripController.getNewLeisureTrip();
     tripA.setName("França");
     tripA.setCurrency("Euro");
@@ -49,5 +46,8 @@ export default class Router {
     tripC.setFinishDate("23/09/2026");
     tripC.setSchoolName("Harvard");
     this.tripController.registerNewTrip(tripC);
+    this.primaryScreen.getFirstScreen();
+
+    //populando o banco para testes
   }
 }
