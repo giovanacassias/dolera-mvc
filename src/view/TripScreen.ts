@@ -360,4 +360,8 @@ export default class TripScreen {
 
     this.router.tripController.deleteTrip(trip);
   }
+
+  public getPDF() {
+    this.router.tripController.generatePDF();
+  }
 }

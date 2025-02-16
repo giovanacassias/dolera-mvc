@@ -54,7 +54,8 @@ export default class PrimaryScreen {
                 4. Pesquisar viagem
                 5. Excluir viagem
                 6. Alterar status da viagem
-                7. Sair
+                7. Gerar relatório em PDF
+                8. Sair
                 
                 `
       );
@@ -92,6 +93,11 @@ export default class PrimaryScreen {
           break;
 
         case "7":
+          //Gerar relatório em PDF
+          this.tripScreen.getPDF();
+          break;
+
+        case "8":
           //Saindo do sistema
           showScreen = false;
           break;

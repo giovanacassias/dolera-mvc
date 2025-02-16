@@ -7,6 +7,7 @@ const Business_1 = __importDefault(require("../model/Business"));
 const Educational_1 = __importDefault(require("../model/Educational"));
 const Leisure_1 = __importDefault(require("../model/Leisure"));
 const MyError_1 = __importDefault(require("./service/MyError"));
+const jspdf_1 = require("jspdf");
 class TripController {
     //recebendo a instância de database, vinda do Router, via construtor;
     constructor(database) {
@@ -139,6 +140,50 @@ class TripController {
             console.log("Viagem excluída!");
             return tripName;
         }
+    }
+    /*   ORIGINAL
+  
+      public deleteTrip(id: number): void {
+      let allTrips: Trip[] = this.getAllTrips();
+      let index = id - 1;
+      allTrips.splice(index, 1);
+      console.log("Viagem excluída!");
+      }
+      
+    */
+    generatePDF() {
+        let allTrips = this.database.getAllTrips();
+        const doc = new jspdf_1.jsPDF();
+        let yPosition = 20; //posição inicial do texto
+        doc.text(`RELATÓRIO DAS SUAS VIAGENS :)`, 10, yPosition);
+        yPosition += 10; //ajustando a posição para o próximo texto
+        if (allTrips.length === 0) {
+            doc.text("Nenhuma viagem cadastrada :(", 10, yPosition);
+            doc.save("relatorio-viagens.pdf");
+            return;
+        }
+        //criando o conteúdo
+        const tripData = allTrips.map((trip, index) => {
+            return `
+      
+      Viagem ${index + 1}: 
+      Destino: ${trip.getName()}
+      Moeda: ${trip.getCurrency()}
+      Ida: ${trip.getStartDate()}
+      Volta: ${trip.getFinishDate()}
+      Orçamento: ${trip.getBudget()}
+      `;
+        });
+        //escrevendo as viagens no PDF
+        tripData.forEach((tripDetails, index) => {
+            doc.text(tripDetails, 10, yPosition);
+            yPosition += 50;
+        });
+        if (yPosition > 270) {
+            doc.addPage();
+            yPosition = 20; // Reinicia a posição na nova página
+        }
+        doc.save("relatorio-viagens.pdf");
     }
 }
 exports.default = TripController;

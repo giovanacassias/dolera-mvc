@@ -6,6 +6,7 @@ import Leisure from "../model/Leisure";
 import MyError from "./service/MyError";
 import { ITraveler } from "../model/ITraveler";
 import Traveler from "../model/Traveler";
+import { jsPDF } from "jspdf";
 
 export default class TripController {
   private database!: Database;
@@ -170,4 +171,45 @@ export default class TripController {
     } 
     
   */
+
+  public generatePDF() {
+    let allTrips = this.database.getAllTrips();
+    const doc = new jsPDF();
+    let yPosition = 20; //posição inicial do texto
+
+    doc.text(`RELATÓRIO DAS SUAS VIAGENS :)`, 10, yPosition);
+    yPosition += 10; //ajustando a posição para o próximo texto
+
+    if (allTrips.length === 0) {
+      doc.text("Nenhuma viagem cadastrada :(", 10, yPosition);
+      doc.save("relatorio-viagens.pdf");
+      return;
+    }
+
+    //criando o conteúdo
+    const tripData = allTrips.map((trip, index) => {
+      return `
+      
+      Viagem ${index + 1}: 
+      Destino: ${trip.getName()}
+      Moeda: ${trip.getCurrency()}
+      Ida: ${trip.getStartDate()}
+      Volta: ${trip.getFinishDate()}
+      Orçamento: R$${trip.getBudget()}
+      `;
+    });
+
+    //escrevendo as viagens no PDF
+    tripData.forEach((tripDetails, index) => {
+      doc.text(tripDetails, 10, yPosition);
+      yPosition += 50;
+    });
+
+    if (yPosition > 270) {
+      doc.addPage();
+      yPosition = 20; // Reinicia a posição na nova página
+    }
+
+    doc.save("relatorio-viagens.pdf");
+  }
 }

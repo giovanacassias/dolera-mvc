@@ -273,5 +273,8 @@ class TripScreen {
         let trip = Number.parseInt(this.prompt(`Digite o número da viagem que deseja excluir: `));
         this.router.tripController.deleteTrip(trip);
     }
+    getPDF() {
+        this.router.tripController.generatePDF();
+    }
 }
 exports.default = TripScreen;
