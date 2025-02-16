@@ -42,7 +42,7 @@ class Router {
         tripC.setFinishDate("23/09/2026");
         tripC.setSchoolName("Harvard");
         this.tripController.registerNewTrip(tripC);
-        this.primaryScreen.getFirstScreen();
+        //this.primaryScreen.getFirstScreen();
         //populando o banco para testes
     }
 }

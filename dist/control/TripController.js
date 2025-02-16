@@ -79,6 +79,9 @@ class TripController {
                         //trip.displayTrip(trip); //OVERRIDING
                         this.displayTrip(trip); //OVERLOAD
                     }
+                    else {
+                        throw MyError_1.default.invalidType();
+                    }
                 });
             }
             else {
@@ -86,7 +89,7 @@ class TripController {
             }
         }
         catch (error) {
-            throw MyError_1.default;
+            console.log(`Um erro aconteceu: ${error.message}`);
         }
     }
     // Implementação do método
@@ -162,17 +165,6 @@ class TripController {
             doc.save("relatorio-viagens.pdf");
             return;
         }
-        //criando o conteúdo
-        /*     const tripData = allTrips.map((trip, index) => {
-          `
-          Viagem ${index + 1}:
-          Destino: ${trip.getName()}
-          Moeda: ${trip.getCurrency()}
-          Ida: ${trip.getStartDate()}
-          Volta: ${trip.getFinishDate()}
-          Orçamento: R$${trip.getBudget()}
-          `;
-        }); */
         //escrevendo as viagens no PDF
         allTrips.forEach((trip, index) => {
             let tripDetails = `

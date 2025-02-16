@@ -85,13 +85,15 @@ export default class TripController {
             this.displayGeneralAspects(trip);
             //trip.displayTrip(trip); //OVERRIDING
             this.displayTrip(trip); //OVERLOAD
+          } else {
+            throw MyError.invalidType();
           }
         });
       } else {
         console.log("Oops! Nenhuma viagem por aqui :( ");
       }
     } catch (error: any) {
-      throw MyError;
+      console.log(`Um erro aconteceu: ${error.message}`);
     }
   }
 
